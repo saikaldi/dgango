@@ -1,0 +1,20 @@
+<!-- lesson 2 -->
+{% extends 'layouts/index.html' %}
+
+{% block content %}
+    <h1>Products</h1>
+    <!-- <h2>{{ products }}</h2> -->
+    {% for prod in products%}
+        <!-- <p>{{prod.title}}</p>
+        <p>{{prod.description}}</p>
+        <p>{{prod.price}}</p> -->
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{prod.title}}</h5>
+              <p class="card-text">{{prod.description}}</p>
+              <a href="#" class="btn btn-primary">More</a>
+            </div>
+          </div>
+    {% endfor %}
+    {% endblock %}
