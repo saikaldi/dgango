@@ -12,3 +12,15 @@ class Product(models.Model):
 
     def __str__(self) -> str:
         return f"{self.id}{self.title}"
+    
+class Category(models.Model):
+    product=models.ForeignKey('post.Product', on_delete=models.CASCADE, related_name='categories')
+    name=models.CharField(max_length=255)
+    description=models.TextField()
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now=True)
+    
+# product=Product.objects.get(id=1)
+# product.categories
+
+# category=Category.objects.get(id=1)

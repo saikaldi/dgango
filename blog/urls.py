@@ -10,5 +10,6 @@ urlpatterns = [
     # path('goodbye/', views.goodbye_view ),
     # path('goodmorning/', views.goodmorning_view )
     path('', views.main_view),
-    path('products/', views.products_view)
+    path('products/', views.products_view),
+    path('categories/', views.category_view)
 ]

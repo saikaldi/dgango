@@ -1,5 +1,5 @@
 from django.shortcuts import HttpResponse, render
-from post.models import Product
+from post.models import Product, Category
 # from datetime import datetime
 # current_date=datetime.now()
 # Create your views here.
@@ -15,13 +15,26 @@ from post.models import Product
 
 # Lesson 2
 def main_view(request):
+    product=Product.objects.all()
+    categories=Category.objects.all()
+    print(categories)
+    for c in categories:
+        print(c.name)
     if request.method == 'GET':
+
         return render(request, 'layouts/index.html')
 
 
 def products_view(request):
     if request.method == 'GET':
         products=Product.objects.all()
+        
         return render(request, 'products/products.html', 
                       context={"products":products})
-
+def category_view(request):
+    if request.method == 'GET':
+        categories=Category.objects.all()
+        context={"categories":categories}
+        return render(request, 'products/categories.html', 
+                      context=context)
+ 
