@@ -31,6 +31,18 @@ def products_view(request):
         
         return render(request, 'products/products.html', 
                       context={"products":products})
+    
+
+def review_view(request, product_id):
+    if request.method == 'GET':
+        product=Product.objects.get(id=product_id)
+        print(product)
+        context={
+            'product':product
+        }
+        # return render(request,'products/review.html', context)
+        return HttpResponse()
+    
 def category_view(request):
     if request.method == 'GET':
         categories=Category.objects.all()

@@ -11,5 +11,6 @@ urlpatterns = [
     # path('goodmorning/', views.goodmorning_view )
     path('', views.main_view),
     path('products/', views.products_view),
+    path('products/<int:product_id>/', views.review_view),
     path('categories/', views.category_view)
 ]

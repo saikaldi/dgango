@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+    <h1>
+        Product review
+    </h1>
+
+    <h2>
+    {{ products.title }} {{ products.rate }}
+    </h2>
+
+    <p>
+    {{ products.content }}
+    </p>
+
+    {% endblock %}
