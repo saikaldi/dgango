@@ -9,7 +9,7 @@ class Product(models.Model):
     price=models.FloatField(default=0)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
-
+    
     def __str__(self) -> str:
         return f"{self.id}{self.title}"
     
@@ -19,6 +19,12 @@ class Category(models.Model):
     description=models.TextField()
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
+
+class Review(models.Model):
+    product=models.ForeignKey('post.Product', on_delete=models.CASCADE, related_name='reviews')
+    rate=models.FloatField(default=0)
+    text=models.TextField()
+
     
 # product=Product.objects.get(id=1)
 # product.categories

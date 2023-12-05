@@ -33,15 +33,20 @@ def products_view(request):
                       context={"products":products})
     
 
-def review_view(request, product_id):
+def product_detail_view(request, product_id):
     if request.method == 'GET':
-        product=Product.objects.get(id=product_id)
-        print(product)
+        try:
+            product=Product.objects.get(id=product_id)
+        except Product.DoesNotExist:
+            return render(request, 'errors/404.html')
+        # print(product)
+
+        
         context={
             'product':product
         }
-        # return render(request,'products/review.html', context)
-        return HttpResponse()
+        return render(request,'products/details.html', context)
+        # return HttpResponse(f"{product_id}")
     
 def category_view(request):
     if request.method == 'GET':

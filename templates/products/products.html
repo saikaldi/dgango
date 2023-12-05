@@ -9,16 +9,16 @@
         <p>{{prod.description}}</p>
         <p>{{prod.price}}</p> -->
         <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
+            <img src="/media/{{prod.image}}" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">{{prod.title}}</h5>
               <p class="card-text">{{prod.description}}</p>
-              <!-- {% for category in products.categories.all %}
+              {% for category in products.categories.all %}
                 <a href="#">
                   {{category}}
                 </a>
-              {%endfor%} -->
-              <a href="/products/{{product.id}}" class="btn btn-primary">More</a>
+              {%endfor%}
+              <a href="/products/{{prod.id}}/" class="btn btn-primary">More</a>
             </div>
           </div>
     {% endfor %}
