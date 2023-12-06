@@ -1,5 +1,6 @@
-from django.shortcuts import HttpResponse, render
-from post.models import Product, Category
+from django.shortcuts import HttpResponse, render, redirect
+from post.models import Product, Category, Review
+from post.forms import ProductCreateForm, CetagoryCreateForm, ReviewCreateForm
 # from datetime import datetime
 # current_date=datetime.now()
 # Create your views here.
@@ -54,4 +55,91 @@ def category_view(request):
         context={"categories":categories}
         return render(request, 'products/categories.html', 
                       context=context)
+def review_view(request):
+    if request.method == 'GET':
+        reviews=Review.objects.all()
+        context={"reviews":reviews}
+        return render(request, 'reviews/reviews.html', 
+                      context=context)
  
+
+def product_create(request):
+    if request.method == 'GET':
+        context = {
+            "form":ProductCreateForm
+        }
+        return render(request, 'products/create.html', context )
+    if request.method == 'POST':
+        # print(request.POST)
+        # print(request.FILES)
+        # title=request.POST.get('title')
+        # if not title:
+        #     return HttpResponse("Title is required")
+        
+        # description=request.POST.get('description')
+        # image=request.POST.get('image')
+            form = ProductCreateForm(request.POST, request.FILES)
+            if form.is_valid():
+                Product.objects.create(
+                    title=form.cleaned_data['title'],
+                    description=form.cleaned_data['description'],
+                    image=form.cleaned_data['image'],
+                    rate=form.cleaned_data['rate']
+                    
+                )
+
+                return redirect("/products/")
+            context = {
+            "form":ProductCreateForm
+        }
+            return redirect('products/create.html', context)
+    
+
+
+def category_create(request):
+    if request.method == 'GET':
+        context = {
+            "form":CetagoryCreateForm
+        }
+        return render(request, 'categories/create.html', context )
+    if request.method == 'POST':
+     
+            form = CetagoryCreateForm(request.POST, request.FILES)
+            if form.is_valid():
+                Category.objects.create(
+                    categoty_name=form.cleaned_data['categoty_name'],
+                    price_range=form.cleaned_data['price_range'],
+                    brand=form.cleaned_data['brand'],
+                )
+
+                return redirect("/categories/")
+            context = {
+            "form":CetagoryCreateForm
+        }
+            return redirect('categories/create.html', context)
+    
+
+
+
+def reviews(request):
+    if request.method == 'GET':
+        context = {
+            "form":ReviewCreateForm
+        }
+        return render(request, 'reviews/review.html', context )
+    if request.method == 'POST':
+     
+            form = ReviewCreateForm(request.POST, request.FILES)
+            if form.is_valid():
+                Review.objects.create(
+                    first_name=form.cleaned_data['first_name'],
+                    last_name=form.cleaned_data['last_name'],
+                
+                    rate=form.cleaned_data['password'],
+                    review=form.cleaned_data['review'],
+                )
+                return redirect("/reviews/")
+            context = {
+            "form":ReviewCreateForm
+        }
+            return redirect('reviews/review.html', context)

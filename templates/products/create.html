@@ -1,0 +1,19 @@
+{% extends 'layouts/index.html' %}
+{% block content %}
+
+<h1>Create Ptoduct</h1>
+
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+<!--  <p>Title</p>
+    <input type="text" name="title">
+    <p>Description</p>
+    <input type="text" name="description" >
+    <input type="file" name="image">
+    <input type="submit" value="Create product"> -->
+    {{ form.as_p }}
+    <input type="submit" value="create_product">
+
+</form>
+
+{% endblock  %}
