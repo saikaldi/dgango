@@ -80,17 +80,18 @@ def product_create(request):
         # image=request.POST.get('image')
             form = ProductCreateForm(request.POST, request.FILES)
             if form.is_valid():
-                Product.objects.create(
-                    title=form.cleaned_data['title'],
-                    description=form.cleaned_data['description'],
-                    image=form.cleaned_data['image'],
-                    rate=form.cleaned_data['rate']
+                # Product.objects.create(
+                #     title=form.cleaned_data['title'],
+                #     description=form.cleaned_data['description'],
+                #     image=form.cleaned_data['image'],
+                #     rate=form.cleaned_data['rate']
                     
-                )
-
+                # )
+                Product.objects.create(**form.cleaned_data)
                 return redirect("/products/")
             context = {
-            "form":ProductCreateForm
+            # "form":ProductCreateForm
+            "form":form
         }
             return redirect('products/create.html', context)
     
