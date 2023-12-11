@@ -28,6 +28,7 @@ def main_view(request):
 
 def products_view(request):
     if request.method == 'GET':
+        print(request.user)
         products=Product.objects.all()
         
         return render(request, 'products/products.html', 
@@ -107,11 +108,12 @@ def category_create(request):
      
             form = CetagoryCreateForm(request.POST, request.FILES)
             if form.is_valid():
-                Category.objects.create(
-                    categoty_name=form.cleaned_data['categoty_name'],
-                    price_range=form.cleaned_data['price_range'],
-                    brand=form.cleaned_data['brand'],
-                )
+                # Category.objects.create(
+                #     categoty_name=form.cleaned_data['categoty_name'],
+                #     price_range=form.cleaned_data['price_range'],
+                #     brand=form.cleaned_data['brand'],
+                # )
+                Category.objects.create(**form.cleaned_data)
 
                 return redirect("/categories/")
             context = {
@@ -132,13 +134,14 @@ def reviews(request):
      
             form = ReviewCreateForm(request.POST, request.FILES)
             if form.is_valid():
-                Review.objects.create(
-                    first_name=form.cleaned_data['first_name'],
-                    last_name=form.cleaned_data['last_name'],
+                Review.objects.create(**form.cleaned_data)
+                # Review.objects.create(
+                #     first_name=form.cleaned_data['first_name'],
+                #     last_name=form.cleaned_data['last_name'],
                 
-                    rate=form.cleaned_data['password'],
-                    review=form.cleaned_data['review'],
-                )
+                #     rate=form.cleaned_data['password'],
+                #     review=form.cleaned_data['review'],
+                # )
                 return redirect("/reviews/")
             context = {
             "form":ReviewCreateForm

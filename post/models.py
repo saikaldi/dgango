@@ -20,6 +20,9 @@ class Category(models.Model):
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.name
+
 class Review(models.Model):
     product=models.ForeignKey('post.Product', on_delete=models.CASCADE, related_name='reviews')
     rate=models.FloatField(default=0)
@@ -30,3 +33,7 @@ class Review(models.Model):
 # product.categories
 
 # category=Category.objects.get(id=1)
+
+# class Categoryy(models.Model):
+#     parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL)
+#     title = models.CharField(max_length=100)
