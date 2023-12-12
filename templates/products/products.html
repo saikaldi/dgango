@@ -3,6 +3,16 @@
 
 {% block content %}
     <h1>Products</h1>
+
+    <form action="/products/" method="GET">
+      <input type="text" name="search" placeholder="search">
+      <input type="submit" value="Search">
+      
+    </form>
+    <a href="?order=title/" method="GET">Title</a>
+    <a href="?order=-title" method="GET">-Title</a>
+    <a href="?order=created_at" method="GET">Date</a>
+    <a href="?order=-created_at" method="GET">-Date</a>
     <!-- <h2>{{ products }}</h2> -->
     {% for prod in products%}
         <!-- <p>{{prod.title}}</p>
@@ -22,4 +32,9 @@
             </div>
           </div>
     {% endfor %}
+    <div >
+      {% for page in pages %}
+          <a href="?page={{ page }}" method="GET"><h1>{{ page }}</h1></a>
+      {% endfor %}
+    </div>
     {% endblock %}
